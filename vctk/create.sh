@@ -58,12 +58,6 @@ do
   #echo ${#list_flac[@]}
   #echo $item
 done
-for item in ${list_dir[@]}
-do
-  list_flac+=($(find stock/wav48_silence_trimmed/$item -iname "$item*mic2.flac"))
-  #echo ${#list_flac[@]}
-  #echo $item
-done
 unset IFS
 
 
@@ -179,7 +173,11 @@ do
   sudo true
 
 
-  pc=$(echo "$n_comp/$n_flac" | bc -l)
+  echo $item
+
+
+
+  pc=$(echo "$n_comp/$n_all_flac" | bc -l)
   v2=${pc:0:6}
   v3=$(echo "100*$v2" | bc -l | awk '{printf "%f", $0}' )
   v4=${v3::-3}
@@ -196,7 +194,7 @@ do
 
   echo "len : $item_length"
 
-  timeout_length=$(echo "$item_length + 2.00025" | bc -l)
+  timeout_length=$(echo "$item_length + 0.20025" | bc -l)
   
   unint_time=$(echo "$unint_time + $timeout_length" | bc -l)
 

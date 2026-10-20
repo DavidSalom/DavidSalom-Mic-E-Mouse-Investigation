@@ -35,7 +35,7 @@ static int SAMPLE_RATE = 8000;
 static MOUSE_TYPE m_type = MOUSE_TYPE::RAZER8KHZ;
 static std::string mouse_cmd;
 
-#define COLLECTION_TIME 120
+#define COLLECTION_TIME 30
 #define BUFFER_SIZE (SAMPLE_RATE * COLLECTION_TIME)
 
 

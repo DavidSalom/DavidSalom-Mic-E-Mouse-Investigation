@@ -23,7 +23,7 @@ class VCTK_CSV(Dataset):
         audio_ext=".csv",
         Fs = 16000,
         resampleMethod = "sinc",
-        device = "cpu"
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     ):
         self._path = root
         self._txt_dir = os.path.join(self._path, "txt")
@@ -63,7 +63,7 @@ class VCTK_CSV(Dataset):
         """
         Load the csv files by running the preprocessing pipeline from core.signal.preprocess
         """
-        T, X, Y = process_from_file(file_path, Fs = self.Fs, method = self.resampleMethod, device = self.device)
+        T, X, Y = processFromFile(file_path, Fs = self.Fs, method = self.resampleMethod, device = self.device)
         XY = torch.stack((X, Y), dim=0)
         
         return XY, self.Fs
