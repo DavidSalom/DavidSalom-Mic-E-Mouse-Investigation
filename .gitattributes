@@ -1,0 +1,6 @@
+models/model_AUDIOMNIST filter=lfs diff=lfs merge=lfs -text
+models/model_AUDIOMNIST.model filter=lfs diff=lfs merge=lfs -text
+models/model.model filter=lfs diff=lfs merge=lfs -text
+models/model_AUDIOMNIST_PERCEPT.model filter=lfs diff=lfs merge=lfs -text
+waveformReconstruction_AUDIOMNIST.ipynb filter=lfs diff=lfs merge=lfs -text
+AudioMNIST-master/gen/noise/noise_2023-11-03_21-00-40.csv filter=lfs diff=lfs merge=lfs -text
