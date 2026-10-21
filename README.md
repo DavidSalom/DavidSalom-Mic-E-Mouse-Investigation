@@ -21,7 +21,7 @@ Basedir = https://github.com/soerenab/AudioMNIST.git
 https://drive.google.com/drive/folders/1DcTldouupfp7BMteE1Br0lq7RCdQQ0Hc?usp=drive_link
 
 ## Authors
-- [David Salom] - Student of vocational training in Sant Josep Obrer Palma de Mallorca.
+- [David Salom](https://github.com/DavidSalom) - Student of vocational training in Sant Josep Obrer Palma de Mallorca.
 ## Citation
 - [Mohamad Fakih]() - PhD Student, EECS, University of California Irvine
 - [Rahul Dharmaji](https://iika.re) - MS Student, EECS, University of California Irvine
