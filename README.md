@@ -1,7 +1,7 @@
 # Mic-E-Mouse: your computer mouse has big ears
 ## Description
 
-Side-Channel Audio Attack through computer mice.
+Ataque de audio de canal lateral a través de ratones de computadora.
 
 ## Requirements
 - [Conda](https://docs.conda.io/en/latest/miniconda.html) or [Mamba](https://mamba.readthedocs.io/en/latest/index.html)
