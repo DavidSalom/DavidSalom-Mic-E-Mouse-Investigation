@@ -13,12 +13,6 @@ The conda/mamba environment can be installed with the following command: `conda 
 
 ### 1. Robustez Numérica y Prevención de `NaN` / `Inf`
 
-#### 🎯 Motivo del cambio
-Durante el procesamiento de señales no uniformes o de baja energía (tramos en silencio), las operaciones matemáticas de interpolación y normalización generaban valores `NaN` o `Inf`:
-- **División por cero en el cálculo de derivadas temporales**: Cuando dos muestras consecutivas compartían la misma marca de tiempo o tenían un intervalo despreciable ($dt = 0$), el factor de ponderación $W$ divergía.
-- **Señales con desviación estándar nula o casi nula**: Al normalizar tramos silenciosos, `torch.std()` tiende a cero, colapsando el entrenamiento de la red.
-- **Corrupción en la conversión a escala Mel dB**: Valores inválidos residuales provocaban divergencia en el logaritmo (`log10`).
-
 #### 📝 Modificaciones implementadas
 
 ##### A) Protección en interpolación temporal (`core2/signal/preprocess.py`)
@@ -49,28 +43,13 @@ Se estabilizó el denominador durante el cálculo de potencia y se aseguró la e
 +   torch.nan_to_num(W)
     W = (torch.maximum(torch.clamp(W, min=1e-10).log10(), torch.clamp(W, min=1e-10).log10().max() - 8.0) + 4.0) / 4.0
 ```
-
----
-
-### 2. Limpieza y Reorganización de Archivos
-
-#### 🎯 Motivo del cambio
-- **Desacoplamiento de la configuración**: Se retiró `config.py` para favorecer una inyección de hiperparámetros dinámica mediante argumentos CLI / diccionarios en lugar de valores fijados en disco.
-- **Modularización de la arquitectura**: Se movió la definición de `ReconstructionModel` de `core/nn/reconstruction.py` directamente hacia los pipelines y notebooks experimentales correspondientes, evitando dependencias rígidas en el paquete central.
-
-#### 🗂️ Comparativa de estructura
-
-| Archivo | Estado en `core` (default) | Estado en `core2` (v2) | Justificación |
-| :--- | :---: | :---: | :--- |
-| `core/config.py` | ✅ Presente | ❌ Retirado | Parametrización externa / flexible. |
-| `core/nn/reconstruction.py` | ✅ Presente | ❌ Retirado | Modularización trasladada a los scripts de entrenamiento. |
-| `waveformReconstruction_AUDIOMNIST.ipynb` | ✅ ~49 MB | — | Notebook principal con outputs y trazas completas. |
-| `waveformReconstruction_AUDIOMNIST2.ipynb` | — | 📄 Plantilla | Cuaderno limpio para nuevas pruebas. |
-
+  
 > [!NOTE]
 > Con estas modificaciones se asegura que el entrenamiento de las redes neuronales no sufra cortes abruptos por gradientes corruptos (`Loss: NaN`) provocados por artefactos en la captura de señales acústicas.
 
 ## New features
+elegir_mouse.sh
+Este script ayuda a elegir el ratón de nuestro sistema para editar el código de mouse_logger y poder usarlo con comodidad.
 
 ## Investigation
 https://mic-e-mouse-investigation.com
